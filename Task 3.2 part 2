@@ -1,0 +1,6 @@
+SELECT COUNT(film.film_id), language.name
+FROM film
+INNER JOIN language
+ON language.language_id = film.language_id
+GROUP BY language.language_id, language.name
+ORDER BY COUNT(film.film_id) DESC;
