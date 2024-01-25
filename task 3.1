@@ -1,0 +1,24 @@
+----This code was used to answer how many actors had the first name "Ed".
+--SELECT COUNT(*)
+--   FROM actor
+--   WHERE first_name = 'Ed';
+
+----This code finds the first 10 rows in the Payment table.
+--SELECT * FROM payment LIMIT 10;
+
+----This retrieves all the table data. 
+--SELECT * FROM information_schema.tables
+--   WHERE table_schema = 'public'
+--   AND table_type = 'BASE TABLE';
+
+----This retrieves just the table names.
+--SELECT table_name FROM information_schema.tables
+--	WHERE table_schema = 'public'   	
+--	AND table_type = 'BASE TABLE';
+
+--This finds the number of films rented by the number of days they were rented.
+--Most customers keep movies for 6 days.
+SELECT rental_duration AS "rented for (in days)", COUNT(*) AS "number of films"
+   FROM film
+   GROUP BY 1
+   ORDER BY 2 DESC;
