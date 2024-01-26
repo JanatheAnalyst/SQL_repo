@@ -1,0 +1,38 @@
+
+----Make a list of the current possible categories of movies.
+--SELECT DISTINCT Name, category_id FROM CATEGORY
+--ORDER BY category_id;
+
+----Insert some new categories into the category table. 
+--INSERT INTO category 
+--(category_id, name, last_update) 
+--VALUES 
+--(17,'Thriller',NOW()),
+--(18,'Crime',NOW()),
+--(19,'Mystery',NOW()),
+--(20,'Romance',NOW()),
+--(21,'War',NOW());
+
+
+----How to create a table with constraints:
+--CREATE TABLE category
+--(
+-- category_id integer NOT NULL DEFAULT nextval('category_category_id_seq'::regclass),
+-- name text COLLATE pg_catalog."default" NOT NULL,
+-- last_update timestamp with time zone NOT NULL DEFAULT now(),
+-- CONSTRAINT category_pkey PRIMARY KEY (category_id)
+--);
+
+
+----Update a movie to the right category. 
+--UPDATE film_category
+--SET category_id = 17
+--WHERE film_id = 5
+
+
+----Since there aren't many mystery movies, we are deleting "mystery" as a category. 
+--DELETE FROM category
+--WHERE name = 'Mystery'
+
+
+
