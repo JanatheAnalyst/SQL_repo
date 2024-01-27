@@ -1,0 +1,48 @@
+----Find all films with the word "Uptown" in it. 
+--SELECT film_id, title, description FROM film
+--WHERE title LIKE '%Uptown%';
+
+
+----Find a film with a rental length longer than 120 minutes and a rental rate greater than 2.99. 
+--SELECT film_id, title, description, length, rental_rate FROM film
+--WHERE
+--  length > 120 AND rental_rate > 2.99;
+
+
+----Find films with rental durations less than 7 and greater than 3 days. 
+--SELECT film_id, title, description, rental_duration FROM film
+--WHERE rental_duration BETWEEN 3.01 AND 6.99;
+
+
+----Find films with less than a 14.99 replacement cost. 
+--SELECT film_id, title, description, replacement_cost FROM film
+--WHERE replacement_cost < 14.99;
+
+
+----Find films with a G or PG-13 rating. 
+--SELECT film_id, title, description, rating FROM film
+--WHERE rating IN ('G', 'PG-13');
+
+
+----Find the number of movies, the average movie rental rate, and the maximum and minimum rental duration
+----of movies rated "G" or "PG-13".
+--SELECT COUNT(title) AS "count of movies",	
+--	AVG(rental_rate) AS "average movie rental rate",
+--	MAX(length) AS "maximum rental duration",
+--	MIN(length) AS "minimum movie duration"
+--FROM film 	
+--WHERE rating IN ('G', 'PG-13');	
+
+
+----Find the movie count, average rental rate, and max and min rental durations
+----of movies from all ratings, grouped by rating.
+--SELECT rating AS "rental rating",	
+--	COUNT(title) AS "count of movies",
+--	AVG(rental_rate) AS "average movie rental rate",
+--	MAX(length) AS "maximum rental duration",
+--	MIN(length) AS "minimum movie duration"
+--FROM film 	
+--GROUP BY rating;	
+
+
+
