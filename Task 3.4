@@ -1,0 +1,17 @@
+----Find the top rental prices. 
+--SELECT rental_rate, release_year, title FROM film
+--ORDER BY rental_rate DESC;
+
+
+-- Find the average rental rate for each rating category.
+SELECT BY AVG(rental_rate), rating FROM film
+GROUP BY rating
+ORDER BY AVG(rental_rate) DESC;
+
+
+--Find the minimum and maximum durations for each rating category.
+SELECT rating, MAX(rental_duration), MIN(rental_duration) FROM film
+GROUP BY rating
+ORDER BY MAX(rental_duration) DESC;
+
+
