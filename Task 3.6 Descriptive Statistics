@@ -1,0 +1,59 @@
+--Descriptive Statistics
+--The first four paragraphs of this code give the descriptive statistics 
+--of numerical columns
+
+SELECT
+  AVG(rental_duration) AS Average_Rental_Time,
+  MIN(rental_duration) AS Minimum_Rental_Time, 
+  MAX(rental_duration) AS Maximum_Rental_Time,
+  COUNT(rental_duration) AS Count_Rental_Time,
+  COUNT(*) AS Count_Rows
+FROM film;
+
+
+SELECT
+  AVG(rental_rate) AS Average_Rental_Rate,
+  MIN(rental_rate) AS Minimum_Rental_Rate, 
+  MAX(rental_rate) AS Maximum_Rental_Rate,
+  COUNT(rental_rate) AS Count_Rental_Rate,
+  COUNT(*) AS Count_Rows
+FROM film;
+
+
+SELECT
+  AVG(length) AS Average_Length,
+  MIN(length) AS Minimum_Length, 
+  MAX(length) AS Maximum_Length,
+  COUNT(length) AS Count_Length,
+  COUNT(*) AS Count_Rows
+FROM film;
+
+
+SELECT
+  AVG(replacement_cost) AS Average_Replacement_Cost,
+  MIN(replacement_cost) AS Minimum_Replacement_Cost, 
+  MAX(replacement_cost) AS Maximum_Replacement_Cost,
+  COUNT(replacement_cost) AS Count_Replacement_Cost,
+  COUNT(*) AS Count_Rows
+FROM film;
+
+
+--The next 3 paragraphs of code show the descriptive statistics 
+--of categorical data
+--MODE() finds the most common value in that column
+
+SELECT MODE() WITHIN GROUP (ORDER BY special_features)
+  AS modal_value
+FROM film;
+
+
+SELECT MODE() WITHIN GROUP (ORDER BY fulltext)
+  AS modal_value_fulltext
+FROM film;
+
+
+SELECT MODE() WITHIN GROUP (ORDER BY store_id)
+  AS modal_value_store
+FROM customer;
+
+
