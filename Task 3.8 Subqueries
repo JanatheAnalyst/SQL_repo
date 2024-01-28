@@ -1,0 +1,76 @@
+--The following query uses a subquery to find the average total payments
+--of the top 5 spending customers
+
+SELECT AVG(total_payment) AS average
+FROM 
+(SELECT 
+SUM(payment.amount) AS total_payment,
+customer.customer_id, 
+customer.first_name, 
+customer.last_name, 
+city.city, 
+country.country
+FROM payment
+INNER JOIN customer ON payment.customer_id = customer.customer_id
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id 
+WHERE city IN 
+('Cape Coral',
+'Santa Brbara dOeste',
+'Memphis',
+'Tanza',
+'Valparai',
+'Santa Rosa',
+'Aurora',
+'Tanauan',
+'Halisahar',
+'Bijapur')
+GROUP BY customer.customer_id, customer.first_name, customer.last_name, city.city, country.country
+ORDER BY SUM(payment.amount) DESC
+LIMIT 5);
+
+
+--The following query makes a table showing:
+--The total number of customers and the total number of top 5 customers
+--in each country, ordered by total top customers. 
+
+SELECT 
+COUNT(DISTINCT payment.customer_id) AS all_customer_count,
+country.country AS country,
+COUNT(DISTINCT top_5_customers.cust_id) AS top_customer_count
+FROM payment
+INNER JOIN customer ON payment.customer_id = customer.customer_id
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id 
+LEFT JOIN 
+(SELECT 
+SUM(payment.amount), 
+customer.customer_id AS cust_id, 
+customer.first_name, 
+customer.last_name, 
+city.city, 
+country.country AS country
+FROM payment
+INNER JOIN customer ON payment.customer_id = customer.customer_id
+INNER JOIN address ON customer.address_id = address.address_id
+INNER JOIN city ON address.city_id = city.city_id
+INNER JOIN country ON city.country_id = country.country_id 
+WHERE city IN 
+('Cape Coral',
+'Santa Brbara dOeste',
+'Memphis',
+'Tanza',
+'Valparai',
+'Santa Rosa',
+'Aurora',
+'Tanauan',
+'Halisahar',
+'Bijapur')
+GROUP BY customer.customer_id, customer.first_name, customer.last_name, city.city, country.country
+ORDER BY SUM(payment.amount) DESC
+LIMIT 5) AS top_5_customers ON country.country = top_5_customers.country 
+GROUP BY top_5_customers.country, country.country
+ORDER BY COUNT(top_5_customers) DESC;
+
